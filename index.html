@@ -68,11 +68,17 @@
                 background: linear-gradient(
                     90deg,
                     transparent 0%,
-                    rgba(74, 158, 255, 0.3) 50%,
+                    color-mix(in srgb, var(--accent-primary) 60%, transparent)
+                        40%,
+                    var(--accent-primary) 50%,
+                    color-mix(in srgb, var(--accent-primary) 60%, transparent)
+                        60%,
                     transparent 100%
                 );
                 background-size: 200% 100%;
-                animation: shimmer 4s linear infinite;
+                animation: shimmer 5s linear infinite;
+                opacity: 0.9;
+                border-radius: 1px;
             }
 
             @keyframes shimmer {
@@ -482,14 +488,15 @@
                                 href="https://bell-jamie.github.io/iso-limits-and-fits/"
                                 class="tool-link tool-link-stable"
                             >
-                                Stable <span class="version-tag">v1.0.0</span>
+                                Stable
+                                <span class="version-tag">v0.6.4-alpha</span>
                             </a>
                             <a
                                 href="https://bell-jamie.github.io/iso-limits-and-fits/development"
                                 class="tool-link tool-link-dev"
                             >
                                 Development
-                                <span class="version-tag">v1.1.0-dev</span>
+                                <span class="version-tag">v0.7.0-indev</span>
                             </a>
                         </div>
                     </div>
@@ -506,14 +513,14 @@
                                 href="https://bell-jamie.github.io/bolted-joint-studio/"
                                 class="tool-link tool-link-stable"
                             >
-                                Stable <span class="version-tag">v0.2.0</span>
+                                Stable <span class="version-tag">v0.1.0</span>
                             </a>
                             <a
                                 href="https://bell-jamie.github.io/bolted-joint-studio/development"
                                 class="tool-link tool-link-dev"
                             >
                                 Development
-                                <span class="version-tag">v0.3.0-dev</span>
+                                <span class="version-tag">v0.2.0-indev</span>
                             </a>
                         </div>
                     </div>
