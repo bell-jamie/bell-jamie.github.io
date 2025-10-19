@@ -1,18 +1,29 @@
 <!doctype html>
 <html lang="en">
     <head>
+        <link rel="icon" type="image/x-icon" href="favicon.ico" />
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Engineering Tools | bell-jamie</title>
+        <title>Engineering Tools</title>
         <style>
             :root {
-                --rust-orange: #ce422b;
-                --rust-dark: #3b3735;
-                --rust-light: #f74c00;
+                --accent-primary: #4a9eff;
+                --accent-secondary: #357abd;
                 --bg-dark: #1a1a1a;
                 --bg-card: #2a2a2a;
                 --text-primary: #e0e0e0;
                 --text-secondary: #a0a0a0;
+                --border-color: #3a3a3a;
+            }
+
+            [data-theme="light"] {
+                --accent-primary: #2563eb;
+                --accent-secondary: #1d4ed8;
+                --bg-dark: #ffffff;
+                --bg-card: #f8f9fa;
+                --text-primary: #1a1a1a;
+                --text-secondary: #6b7280;
+                --border-color: #e5e7eb;
             }
 
             * {
@@ -32,26 +43,51 @@
                 max-width: 1200px;
                 margin: 0 auto;
                 padding: 2rem;
+                padding-bottom: 120px;
             }
 
             header {
                 text-align: center;
                 padding: 3rem 0;
-                border-bottom: 2px solid var(--rust-orange);
+                border-bottom: none;
                 margin-bottom: 3rem;
+                position: relative;
+            }
+
+            header::before,
+            header::after {
+                display: none;
+            }
+
+            .header-separator {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                height: 2px;
+                width: 100%;
+                background: linear-gradient(
+                    90deg,
+                    transparent 0%,
+                    rgba(74, 158, 255, 0.3) 50%,
+                    transparent 100%
+                );
+                background-size: 200% 100%;
+                animation: shimmer 4s linear infinite;
+            }
+
+            @keyframes shimmer {
+                0% {
+                    background-position: -200% 0;
+                }
+                100% {
+                    background-position: 200% 0;
+                }
             }
 
             h1 {
                 font-size: 2.5rem;
                 margin-bottom: 0.5rem;
-                background: linear-gradient(
-                    135deg,
-                    var(--rust-orange),
-                    var(--rust-light)
-                );
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                background-clip: text;
+                color: var(--text-primary);
             }
 
             .subtitle {
@@ -59,15 +95,89 @@
                 font-size: 1.1rem;
             }
 
-            .rust-badge {
-                display: inline-block;
-                background: var(--rust-orange);
-                color: white;
-                padding: 0.3rem 0.8rem;
-                border-radius: 4px;
-                font-size: 0.9rem;
+            .tech-stack {
+                display: flex;
+                gap: 0.25rem;
+                align-items: center;
+                justify-content: center;
                 margin-top: 1rem;
-                font-weight: 600;
+                font-size: 0.9rem;
+                color: var(--text-secondary);
+                flex-wrap: wrap;
+            }
+
+            .tech-stack span {
+                color: var(--text-secondary);
+            }
+
+            .tech-link {
+                color: var(--accent-primary);
+                text-decoration: none;
+                transition: all 0.2s ease;
+                position: relative;
+                padding: 0.2rem 0.4rem;
+                border-radius: 3px;
+            }
+
+            .tech-link:hover {
+                color: var(--text-primary);
+                background: rgba(74, 158, 255, 0.1);
+            }
+
+            .tech-link::after {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 0.4rem;
+                right: 0.4rem;
+                height: 1px;
+                background: var(--accent-primary);
+                transform: scaleX(0);
+                transition: transform 0.2s ease;
+            }
+
+            .tech-link:hover::after {
+                transform: scaleX(1);
+            }
+
+            .theme-toggle {
+                background: transparent;
+                border: 1px solid var(--border-color);
+                border-radius: 6px;
+                padding: 0.4rem 0.6rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                gap: 0.4rem;
+            }
+
+            .theme-toggle:hover {
+                border-color: var(--accent-primary);
+                background: rgba(74, 158, 255, 0.1);
+            }
+
+            .theme-toggle svg {
+                width: 16px;
+                height: 16px;
+                color: var(--text-secondary);
+            }
+
+            .theme-toggle:hover svg {
+                color: var(--accent-primary);
+            }
+
+            .theme-toggle .sun-icon {
+                display: none;
+            }
+
+            [data-theme="light"] .theme-toggle .sun-icon {
+                display: block;
+            }
+
+            [data-theme="light"] .theme-toggle .moon-icon {
+                display: none;
             }
 
             .section {
@@ -77,23 +187,12 @@
             .section-title {
                 font-size: 1.8rem;
                 margin-bottom: 1.5rem;
-                color: var(--rust-light);
-                display: flex;
-                align-items: center;
-                gap: 0.5rem;
-            }
-
-            .section-title::before {
-                content: "";
-                width: 4px;
-                height: 1.5rem;
-                background: var(--rust-orange);
-                display: block;
+                color: var(--text-primary);
             }
 
             .tools-grid {
                 display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
                 gap: 1.5rem;
             }
 
@@ -101,64 +200,172 @@
                 background: var(--bg-card);
                 padding: 1.5rem;
                 border-radius: 8px;
-                border: 1px solid #3a3a3a;
+                border: 1px solid var(--border-color);
                 transition: all 0.3s ease;
-                text-decoration: none;
                 color: inherit;
-                display: block;
+                display: flex;
+                flex-direction: column;
             }
 
             .tool-card:hover {
-                border-color: var(--rust-orange);
+                border-color: var(--accent-primary);
                 transform: translateY(-4px);
-                box-shadow: 0 8px 16px rgba(206, 66, 43, 0.2);
+                box-shadow: 0 8px 16px rgba(74, 158, 255, 0.2);
             }
 
             .tool-card h3 {
-                color: var(--rust-light);
+                color: var(--text-primary);
                 margin-bottom: 0.5rem;
                 font-size: 1.3rem;
+            }
+
+            .version-tag {
+                font-size: 0.7rem;
+                font-weight: 500;
+                padding: 0.15rem 0.4rem;
+                border-radius: 3px;
+                white-space: nowrap;
+            }
+
+            .tool-link-stable .version-tag {
+                background: rgba(255, 255, 255, 0.2);
+                color: rgba(255, 255, 255, 0.9);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+            }
+
+            .tool-link-dev .version-tag {
+                background: rgba(74, 158, 255, 0.15);
+                color: var(--accent-primary);
+                border: 1px solid rgba(74, 158, 255, 0.3);
             }
 
             .tool-card p {
                 color: var(--text-secondary);
                 font-size: 0.95rem;
+                margin-bottom: 1rem;
+                flex-grow: 1;
+            }
+
+            .tool-links {
+                display: flex;
+                flex-direction: row;
+                gap: 0.75rem;
+                margin-top: 1rem;
+            }
+
+            .tool-link {
+                flex: 1;
+                padding: 0.6rem 1rem;
+                border-radius: 4px;
+                text-decoration: none;
+                text-align: center;
+                font-size: 0.9rem;
+                font-weight: 600;
+                transition: all 0.2s ease;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+            }
+
+            .tool-link-stable {
+                background: var(--accent-primary);
+                color: white;
+            }
+
+            .tool-link-stable:hover {
+                background: var(--accent-secondary);
+                transform: scale(1.05);
+                box-shadow: 0 4px 12px rgba(74, 158, 255, 0.5);
+            }
+
+            .tool-link-dev {
+                background: rgba(74, 158, 255, 0.2);
+                color: var(--accent-primary);
+                border: 1px solid var(--accent-primary);
+            }
+
+            .tool-link-dev:hover {
+                background: rgba(74, 158, 255, 0.3);
+                border-color: var(--accent-secondary);
+                box-shadow: 0 4px 12px rgba(239, 68, 68, 0.5);
+                transform: scale(1.05);
+            }
+
+            .tool-card.disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+
+            .tool-card.disabled:hover {
+                transform: none;
+                border-color: var(--border-color);
+                box-shadow: none;
+            }
+
+            .tool-card.disabled h3 {
+                color: var(--text-secondary);
+            }
+
+            .tool-link.disabled {
+                pointer-events: none;
+                opacity: 0.4;
+                cursor: not-allowed;
+            }
+
+            .coming-soon-badge {
+                display: inline-block;
+                background: rgba(160, 160, 160, 0.2);
+                color: var(--text-secondary);
+                padding: 0.2rem 0.6rem;
+                border-radius: 4px;
+                font-size: 0.8rem;
+                margin-left: 0.5rem;
+                font-weight: 600;
             }
 
             .social-links {
                 display: flex;
                 gap: 1rem;
                 flex-wrap: wrap;
+                justify-content: center;
             }
 
             .social-link {
-                background: var(--bg-card);
-                padding: 0.8rem 1.5rem;
-                border-radius: 6px;
+                background: transparent;
+                padding: 0;
+                border-radius: 0;
                 text-decoration: none;
-                color: var(--text-primary);
-                border: 1px solid #3a3a3a;
-                transition: all 0.3s ease;
+                color: var(--text-secondary);
+                border: none;
+                transition: color 0.3s ease;
                 display: flex;
                 align-items: center;
-                gap: 0.5rem;
+                gap: 0.3rem;
+                font-size: 0.9rem;
             }
 
             .social-link:hover {
-                border-color: var(--rust-orange);
-                background: var(--rust-dark);
+                color: var(--accent-primary);
+                background: transparent;
+            }
+
+            .social-link svg {
+                width: 16px;
+                height: 16px;
             }
 
             .blog-post {
                 background: var(--bg-card);
                 padding: 1.5rem;
                 border-radius: 8px;
-                border-left: 4px solid var(--rust-orange);
+                border-left: 4px solid var(--accent-primary);
                 margin-bottom: 1.5rem;
             }
 
             .blog-post h3 {
-                color: var(--rust-light);
+                color: var(--text-primary);
                 margin-bottom: 0.5rem;
             }
 
@@ -168,34 +375,58 @@
                 margin-bottom: 0.8rem;
             }
 
-            .widget {
-                background: var(--bg-card);
-                padding: 1.5rem;
-                border-radius: 8px;
-                border: 1px solid var(--rust-orange);
-            }
-
-            .widget h3 {
-                color: var(--rust-light);
-                margin-bottom: 1rem;
-            }
-
             footer {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
                 text-align: center;
                 padding: 2rem 0;
-                margin-top: 4rem;
-                border-top: 1px solid #3a3a3a;
+                border-top: 1px solid var(--border-color);
                 color: var(--text-secondary);
+                background: var(--bg-dark);
+                z-index: 1000;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
             }
 
-            .add-tool-hint {
-                background: rgba(206, 66, 43, 0.1);
-                border: 1px dashed var(--rust-orange);
-                padding: 1rem;
-                border-radius: 6px;
+            .footer-content {
+                display: flex;
+                align-items: center;
+                gap: 2rem;
+                flex-wrap: wrap;
+                justify-content: center;
+                width: 100%;
+                position: relative;
+            }
+
+            .footer-content p {
+                flex: 1;
                 text-align: center;
-                color: var(--text-secondary);
-                font-style: italic;
+            }
+
+            .theme-toggle-wrapper {
+                position: absolute;
+                right: 2rem;
+            }
+
+            @media (max-width: 768px) {
+                .theme-toggle-wrapper {
+                    position: static;
+                }
+                .footer-content {
+                    flex-direction: column;
+                    gap: 1rem;
+                }
+                .footer-content p {
+                    flex: none;
+                }
+            }
+
+            .section.connect-section {
+                display: none;
             }
         </style>
     </head>
@@ -204,54 +435,142 @@
             <header>
                 <h1>Engineering Tools</h1>
                 <p class="subtitle">
-                    bell-jamie's collection of web-based engineering utilities
+                    Web-based calculators and utilities for mechanical
+                    engineering
                 </p>
-                <span class="rust-badge">Built with Rust + egui</span>
+                <div class="tech-stack">
+                    <span>Built with</span>
+                    <a
+                        href="https://www.rust-lang.org/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="tech-link"
+                        >Rust</a
+                    >
+                    <span>+</span>
+                    <a
+                        href="https://github.com/emilk/egui/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="tech-link"
+                        >egui</a
+                    >
+                    <span>+</span>
+                    <a
+                        href="https://webassembly.org/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="tech-link"
+                        >WebAssembly</a
+                    >
+                </div>
+                <div class="header-separator"></div>
             </header>
 
             <section class="section">
                 <h2 class="section-title">Tools</h2>
                 <div class="tools-grid">
-                    <!-- Add your tools here -->
-                    <a
-                        href="https://bell-jamie.github.io/tool-name-1"
-                        class="tool-card"
-                    >
-                        <h3>Tool Name 1</h3>
+                    <div class="tool-card">
+                        <h3>Precision Fit Studio</h3>
                         <p>
-                            Brief description of what this tool does and why
-                            it's useful.
+                            A general purpose cylindrical fit tool. Covers both
+                            ISO and custom fits, with MMC, LMC and temperature
+                            outputs.
                         </p>
-                    </a>
+                        <div class="tool-links">
+                            <a
+                                href="https://bell-jamie.github.io/iso-limits-and-fits/"
+                                class="tool-link tool-link-stable"
+                            >
+                                Stable <span class="version-tag">v1.0.0</span>
+                            </a>
+                            <a
+                                href="https://bell-jamie.github.io/iso-limits-and-fits/development"
+                                class="tool-link tool-link-dev"
+                            >
+                                Development
+                                <span class="version-tag">v1.1.0-dev</span>
+                            </a>
+                        </div>
+                    </div>
 
-                    <a
-                        href="https://bell-jamie.github.io/tool-name-2"
-                        class="tool-card"
-                    >
-                        <h3>Tool Name 2</h3>
+                    <div class="tool-card">
+                        <h3>Bolted Joint Studio</h3>
                         <p>
-                            Brief description of what this tool does and why
-                            it's useful.
+                            A bolted joint calculator currently in development.
+                            I'm building this with a strong focus on the user
+                            interface.
                         </p>
-                    </a>
-
-                    <div class="tool-card add-tool-hint">
-                        <h3>+ Add Your Tools</h3>
-                        <p>
-                            Edit this HTML to add your tools with their GitHub
-                            Pages URLs
-                        </p>
+                        <div class="tool-links">
+                            <a
+                                href="https://bell-jamie.github.io/bolted-joint-studio/"
+                                class="tool-link tool-link-stable"
+                            >
+                                Stable <span class="version-tag">v0.2.0</span>
+                            </a>
+                            <a
+                                href="https://bell-jamie.github.io/bolted-joint-studio/development"
+                                class="tool-link tool-link-dev"
+                            >
+                                Development
+                                <span class="version-tag">v0.3.0-dev</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <section class="section">
-                <h2 class="section-title">Connect</h2>
+                <h2 class="section-title">Updates & Notes</h2>
+
+                <div class="blog-post">
+                    <h3>Welcome to my homepage</h3>
+                    <div class="blog-date">October 19th, 2025</div>
+                    <p>
+                        This page hosts my collection of engineering tools built
+                        with Rust and egui, compiled to WebAssembly for browser
+                        use.
+                    </p>
+                </div>
+            </section>
+
+            <footer>
+                <div class="footer-content">
+                    <p>© 2025 James Bell</p>
+                    <div class="theme-toggle-wrapper">
+                        <button
+                            class="theme-toggle"
+                            onclick="toggleTheme()"
+                            aria-label="Toggle dark/light mode"
+                        >
+                            <svg
+                                class="moon-icon"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                            >
+                                <path
+                                    d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
+                                ></path>
+                            </svg>
+                            <svg
+                                class="sun-icon"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                                    clip-rule="evenodd"
+                                ></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
                 <div class="social-links">
                     <a href="https://github.com/bell-jamie" class="social-link">
                         <svg
-                            width="20"
-                            height="20"
+                            width="16"
+                            height="16"
                             viewBox="0 0 24 24"
                             fill="currentColor"
                         >
@@ -262,12 +581,12 @@
                         GitHub
                     </a>
                     <a
-                        href="https://linkedin.com/in/your-profile"
+                        href="https://www.linkedin.com/in/bell-jamie/"
                         class="social-link"
                     >
                         <svg
-                            width="20"
-                            height="20"
+                            width="16"
+                            height="16"
                             viewBox="0 0 24 24"
                             fill="currentColor"
                         >
@@ -277,10 +596,13 @@
                         </svg>
                         LinkedIn
                     </a>
-                    <a href="mailto:your.email@example.com" class="social-link">
+                    <a
+                        href="mailto:james.m.h.bell@icloud.com"
+                        class="social-link"
+                    >
                         <svg
-                            width="20"
-                            height="20"
+                            width="16"
+                            height="16"
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
@@ -294,43 +616,21 @@
                         Email
                     </a>
                 </div>
-            </section>
-
-            <section class="section">
-                <h2 class="section-title">Updates & Notes</h2>
-
-                <div class="blog-post">
-                    <h3>Welcome to the Tool Directory</h3>
-                    <div class="blog-date">October 2025</div>
-                    <p>
-                        This directory hosts my collection of engineering tools
-                        built with Rust and egui, compiled to WebAssembly for
-                        browser use. Each tool is designed to be fast, reliable,
-                        and accessible directly from your browser.
-                    </p>
-                </div>
-
-                <div class="widget">
-                    <h3>About These Tools</h3>
-                    <p>All tools are built using:</p>
-                    <ul
-                        style="
-                            margin-left: 1.5rem;
-                            margin-top: 0.5rem;
-                            color: var(--text-secondary);
-                        "
-                    >
-                        <li>Rust programming language</li>
-                        <li>egui (immediate mode GUI)</li>
-                        <li>WebAssembly for browser deployment</li>
-                        <li>GitHub Pages for hosting</li>
-                    </ul>
-                </div>
-            </section>
-
-            <footer>
-                <p>&copy; 2025 bell-jamie | Built with ❤️ and Rust</p>
             </footer>
         </div>
+
+        <script>
+            // Load theme preference
+            const savedTheme = localStorage.getItem("theme") || "dark";
+            document.documentElement.setAttribute("data-theme", savedTheme);
+
+            function toggleTheme() {
+                const currentTheme =
+                    document.documentElement.getAttribute("data-theme");
+                const newTheme = currentTheme === "dark" ? "light" : "dark";
+                document.documentElement.setAttribute("data-theme", newTheme);
+                localStorage.setItem("theme", newTheme);
+            }
+        </script>
     </body>
 </html>
