@@ -1,0 +1,23 @@
+name: Deploy Directory to GitHub Pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # allows manual trigger
+
+permissions:
+  contents: write # for committing to gh-pages branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: . # deploy from root of repo
+          branch: gh-pages
+          single-commit: true # keeps gh-pages branch clean
+          clean: true # removes files that don't exist in source
