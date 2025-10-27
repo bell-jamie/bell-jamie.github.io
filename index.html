@@ -54,11 +54,6 @@
                 position: relative;
             }
 
-            header::before,
-            header::after {
-                display: none;
-            }
-
             .header-separator {
                 position: absolute;
                 bottom: 0;
@@ -295,23 +290,8 @@
             .tool-link-dev:hover {
                 background: rgba(74, 158, 255, 0.3);
                 border-color: var(--accent-secondary);
-                box-shadow: 0 4px 12px rgba(239, 68, 68, 0.5);
+                box-shadow: 0 4px 12px rgba(234, 179, 8, 0.6);
                 transform: scale(1.05);
-            }
-
-            .tool-card.disabled {
-                opacity: 0.5;
-                cursor: not-allowed;
-            }
-
-            .tool-card.disabled:hover {
-                transform: none;
-                border-color: var(--border-color);
-                box-shadow: none;
-            }
-
-            .tool-card.disabled h3 {
-                color: var(--text-secondary);
             }
 
             .tool-link.disabled {
@@ -320,15 +300,15 @@
                 cursor: not-allowed;
             }
 
-            .coming-soon-badge {
-                display: inline-block;
-                background: rgba(160, 160, 160, 0.2);
-                color: var(--text-secondary);
-                padding: 0.2rem 0.6rem;
-                border-radius: 4px;
-                font-size: 0.8rem;
-                margin-left: 0.5rem;
-                font-weight: 600;
+            .tool-link-stable.disabled {
+                pointer-events: auto;
+                cursor: not-allowed;
+            }
+
+            .tool-link-stable.disabled:hover {
+                box-shadow: 0 0 12px rgba(239, 68, 68, 0.6);
+                transform: none;
+                background: var(--accent-primary);
             }
 
             .social-links {
@@ -421,7 +401,7 @@
 
             @media (max-width: 768px) {
                 .footer-content {
-                    flex-direction: row; /* stay in one line */
+                    flex-direction: row;
                     justify-content: space-between;
                     padding: 0 1rem;
                 }
@@ -429,10 +409,6 @@
                     text-align: center;
                     flex: 1;
                 }
-            }
-
-            .section.connect-section {
-                display: none;
             }
         </style>
     </head>
@@ -511,9 +487,12 @@
                         <div class="tool-links">
                             <a
                                 href="https://bell-jamie.github.io/bolted-joint-studio/"
-                                class="tool-link tool-link-stable"
+                                class="tool-link tool-link-stable disabled"
                             >
-                                Stable <span class="version-tag">v0.1.0</span>
+                                Stable
+                                <span class="version-tag"
+                                    >No stable release yet</span
+                                >
                             </a>
                             <a
                                 href="https://bell-jamie.github.io/bolted-joint-studio/development"
