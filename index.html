@@ -111,7 +111,7 @@
                 color: var(--text-secondary);
             }
 
-            .tech-link {
+            .tech-stack a {
                 color: var(--accent-primary);
                 text-decoration: none;
                 transition: all 0.2s ease;
@@ -120,12 +120,12 @@
                 border-radius: 3px;
             }
 
-            .tech-link:hover {
+            .tech-stack a:hover {
                 color: var(--text-primary);
                 background: rgba(74, 158, 255, 0.1);
             }
 
-            .tech-link::after {
+            .tech-stack a::after {
                 content: "";
                 position: absolute;
                 bottom: 0;
@@ -137,7 +137,7 @@
                 transition: transform 0.2s ease;
             }
 
-            .tech-link:hover::after {
+            .tech-stack a:hover::after {
                 transform: scaleX(1);
             }
 
@@ -248,14 +248,19 @@
             }
 
             .tool-links {
-                display: flex;
-                flex-wrap: wrap;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
                 gap: 0.75rem;
                 margin-top: 1rem;
             }
 
-            .tool-link {
-                flex: 1;
+            @media (max-width: 450px) {
+                .tool-links {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            .tool-links a {
                 padding: 0.6rem 1rem;
                 border-radius: 4px;
                 text-decoration: none;
@@ -268,44 +273,45 @@
                 align-items: center;
                 justify-content: center;
                 gap: 0.5rem;
+                flex-wrap: wrap;
             }
 
-            .tool-link-stable {
+            .tool-links a.tool-link-stable {
                 background: var(--accent-primary);
                 color: white;
             }
 
-            .tool-link-stable:hover {
+            .tool-links a.tool-link-stable:hover {
                 background: var(--accent-secondary);
                 transform: scale(1.05);
                 box-shadow: 0 4px 12px rgba(74, 158, 255, 0.5);
             }
 
-            .tool-link-dev {
+            .tool-links a.tool-link-dev {
                 background: rgba(74, 158, 255, 0.2);
                 color: var(--accent-primary);
                 border: 1px solid var(--accent-primary);
             }
 
-            .tool-link-dev:hover {
+            .tool-links a.tool-link-dev:hover {
                 background: rgba(74, 158, 255, 0.3);
                 border-color: var(--accent-secondary);
                 box-shadow: 0 4px 12px rgba(234, 179, 8, 0.6);
                 transform: scale(1.05);
             }
 
-            .tool-link.disabled {
+            .tool-links a.disabled {
                 pointer-events: none;
                 opacity: 0.4;
                 cursor: not-allowed;
             }
 
-            .tool-link-stable.disabled {
+            .tool-links a.tool-link-stable.disabled {
                 pointer-events: auto;
                 cursor: not-allowed;
             }
 
-            .tool-link-stable.disabled:hover {
+            .tool-links a.tool-link-stable.disabled:hover {
                 box-shadow: 0 0 12px rgba(239, 68, 68, 0.6);
                 transform: none;
                 background: var(--accent-primary);
@@ -426,7 +432,6 @@
                         href="https://www.rust-lang.org/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="tech-link"
                         >Rust</a
                     >
                     <span>+</span>
@@ -434,7 +439,6 @@
                         href="https://github.com/emilk/egui/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="tech-link"
                         >egui</a
                     >
                     <span>+</span>
@@ -442,7 +446,6 @@
                         href="https://webassembly.org/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="tech-link"
                         >WebAssembly</a
                     >
                 </div>
