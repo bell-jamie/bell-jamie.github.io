@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <link rel="icon" type="image/x-icon" href="favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Engineering Tools</title>
@@ -14,16 +14,21 @@
                 --text-primary: #e0e0e0;
                 --text-secondary: #a0a0a0;
                 --border-color: #3a3a3a;
+                --card-shadow: none;
+                --radius-sm: 4px; /* 4 / 6 / 8 */
+                --radius-md: 6px; /* 6 / 8 / 12 */
+                --radius-lg: 12px; /* 12 / 16 / 20 */
             }
 
             [data-theme="light"] {
                 --accent-primary: #2563eb;
                 --accent-secondary: #1d4ed8;
                 --bg-dark: #ffffff;
-                --bg-card: #f8f9fa;
+                --bg-card: #ffffff;
                 --text-primary: #1a1a1a;
                 --text-secondary: #6b7280;
                 --border-color: #e5e7eb;
+                --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             }
 
             * {
@@ -117,7 +122,7 @@
                 transition: all 0.2s ease;
                 position: relative;
                 padding: 0.2rem 0.4rem;
-                border-radius: 3px;
+                border-radius: var(--radius-sm);
             }
 
             .tech-stack a:hover {
@@ -144,7 +149,7 @@
             .theme-toggle {
                 background: transparent;
                 border: 1px solid var(--border-color);
-                border-radius: 6px;
+                border-radius: var(--radius-md);
                 padding: 0.4rem 0.6rem;
                 display: flex;
                 align-items: center;
@@ -182,7 +187,13 @@
             }
 
             .section {
-                margin-bottom: 3rem;
+                margin-bottom: 2rem;
+                border-bottom: 1px solid var(--border-color);
+                padding-bottom: 2rem;
+            }
+
+            .section:last-of-type {
+                border-bottom: none;
             }
 
             .section-title {
@@ -200,8 +211,9 @@
             .tool-card {
                 background: var(--bg-card);
                 padding: 1.5rem;
-                border-radius: 8px;
+                border-radius: var(--radius-lg);
                 border: 1px solid var(--border-color);
+                box-shadow: var(--card-shadow);
                 transition: all 0.3s ease;
                 color: inherit;
                 display: flex;
@@ -210,21 +222,42 @@
 
             .tool-card:hover {
                 border-color: var(--accent-primary);
-                transform: translateY(-4px);
-                box-shadow: 0 8px 16px rgba(74, 158, 255, 0.2);
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            }
+
+            .tool-card-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 0.5rem;
             }
 
             .tool-card h3 {
                 color: var(--text-primary);
-                margin-bottom: 0.5rem;
                 font-size: 1.3rem;
+                margin: 0;
+            }
+
+            .tool-card-github {
+                color: var(--text-secondary);
+                transition: color 0.2s ease;
+            }
+
+            .tool-card-github:hover {
+                color: var(--accent-primary);
+            }
+
+            .tool-card-github svg {
+                width: 20px;
+                height: 20px;
             }
 
             .version-tag {
                 font-size: 0.7rem;
                 font-weight: 500;
                 padding: 0.15rem 0.4rem;
-                border-radius: 3px;
+                border-radius: var(--radius-sm);
                 white-space: nowrap;
             }
 
@@ -262,7 +295,7 @@
 
             .tool-links a {
                 padding: 0.6rem 1rem;
-                border-radius: 4px;
+                border-radius: var(--radius-md);
                 text-decoration: none;
                 text-align: center;
                 font-size: 0.9rem;
@@ -283,8 +316,6 @@
 
             .tool-links a.tool-link-stable:hover {
                 background: var(--accent-secondary);
-                transform: scale(1.05);
-                box-shadow: 0 4px 12px rgba(74, 158, 255, 0.5);
             }
 
             .tool-links a.tool-link-dev {
@@ -296,25 +327,31 @@
             .tool-links a.tool-link-dev:hover {
                 background: rgba(74, 158, 255, 0.3);
                 border-color: var(--accent-secondary);
-                box-shadow: 0 4px 12px rgba(234, 179, 8, 0.6);
-                transform: scale(1.05);
             }
 
             .tool-links a.disabled {
-                pointer-events: none;
                 opacity: 0.4;
                 cursor: not-allowed;
             }
 
             .tool-links a.tool-link-stable.disabled {
                 pointer-events: auto;
-                cursor: not-allowed;
             }
 
             .tool-links a.tool-link-stable.disabled:hover {
                 box-shadow: 0 0 12px rgba(239, 68, 68, 0.6);
                 transform: none;
                 background: var(--accent-primary);
+            }
+
+            .tool-links a.tool-link-dev.disabled {
+                pointer-events: auto;
+            }
+
+            .tool-links a.tool-link-dev.disabled:hover {
+                box-shadow: 0 0 12px rgba(239, 68, 68, 0.6);
+                transform: none;
+                background: rgba(74, 158, 255, 0.2);
             }
 
             .social-links {
@@ -351,9 +388,17 @@
             .blog-post {
                 background: var(--bg-card);
                 padding: 1.5rem;
-                border-radius: 8px;
-                border-left: 4px solid var(--accent-primary);
+                border-radius: var(--radius-lg);
+                border: 1px solid var(--border-color);
+                box-shadow: var(--card-shadow);
                 margin-bottom: 1.5rem;
+                transition: all 0.3s ease;
+            }
+
+            .blog-post:hover {
+                border-color: var(--accent-primary);
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             }
 
             .blog-post h3 {
@@ -365,6 +410,33 @@
                 color: var(--text-secondary);
                 font-size: 0.85rem;
                 margin-bottom: 0.8rem;
+            }
+
+            .blog-post-content {
+                display: flex;
+                gap: 1.5rem;
+                align-items: start;
+            }
+
+            .blog-post-content p {
+                flex: 1;
+                margin: 0;
+            }
+
+            .blog-post-image {
+                width: 600px;
+                border-radius: var(--radius-md);
+                border: 1px solid var(--border-color);
+            }
+
+            @media (max-width: 1050px) {
+                .blog-post-content {
+                    flex-direction: column;
+                }
+
+                .blog-post-image {
+                    width: 100%;
+                }
             }
 
             footer {
@@ -400,9 +472,72 @@
                 font-size: 0.9rem;
             }
 
-            .theme-toggle-wrapper {
+            .footer-buttons {
                 position: absolute;
                 right: 1.5rem;
+                display: flex;
+                gap: 0.5rem;
+            }
+
+            .modal-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.7);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 2000;
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+            }
+
+            .modal-overlay.active {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .modal {
+                background: var(--bg-card);
+                border: 1px solid var(--border-color);
+                border-radius: var(--radius-lg);
+                max-width: 500px;
+                width: 90%;
+                padding: 2rem;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            }
+
+            .modal h2 {
+                color: var(--text-primary);
+                margin-bottom: 1rem;
+                font-size: 1.5rem;
+            }
+
+            .modal p {
+                color: var(--text-secondary);
+                margin-bottom: 1rem;
+                line-height: 1.6;
+            }
+
+            .modal-button {
+                background: var(--accent-primary);
+                color: white;
+                border: none;
+                padding: 0.75rem 1.5rem;
+                border-radius: var(--radius-md);
+                font-size: 1rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: background 0.2s ease;
+                width: 100%;
+                margin-top: 1rem;
+            }
+
+            .modal-button:hover {
+                background: var(--accent-secondary);
             }
 
             @media (max-width: 768px) {
@@ -419,6 +554,25 @@
         </style>
     </head>
     <body>
+        <div class="modal-overlay" id="disclaimerModal">
+            <div class="modal">
+                <h2>Disclaimer</h2>
+                <p>
+                    These tools are provided for educational and reference
+                    purposes only. The author accepts no liability for any
+                    decisions, designs, or outcomes resulting from the use of
+                    these calculators.
+                </p>
+                <p>
+                    Always verify results independently and consult qualified
+                    professionals for critical engineering applications.
+                </p>
+                <button class="modal-button" onclick="closeDisclaimer()">
+                    I Understand
+                </button>
+            </div>
+        </div>
+
         <div class="container">
             <header>
                 <h1>Engineering Tools</h1>
@@ -456,7 +610,22 @@
                 <h2 class="section-title">Tools</h2>
                 <div class="tools-grid">
                     <div class="tool-card">
-                        <h3>Precision Fit Studio</h3>
+                        <div class="tool-card-header">
+                            <h3>Precision Fit Studio</h3>
+                            <a
+                                href="https://github.com/bell-jamie/iso-limits-and-fits"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="tool-card-github"
+                                title="View on GitHub"
+                            >
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                                    />
+                                </svg>
+                            </a>
+                        </div>
                         <p>
                             A general purpose cylindrical fit tool. Covers both
                             ISO and custom fits, with MMC, LMC and temperature
@@ -481,11 +650,26 @@
                     </div>
 
                     <div class="tool-card">
-                        <h3>Bolted Joint Studio</h3>
+                        <div class="tool-card-header">
+                            <h3>Bolted Joint Studio</h3>
+                            <a
+                                href="https://github.com/bell-jamie/bolted-joint-studio"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="tool-card-github"
+                                title="View on GitHub"
+                            >
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                                    />
+                                </svg>
+                            </a>
+                        </div>
                         <p>
-                            A bolted joint calculator currently in development.
-                            I'm building this with a strong focus on the user
-                            interface.
+                            A VDI 2230 bolted joint calculator currently in
+                            development. In parallel development with the
+                            Redprint library.
                         </p>
                         <div class="tool-links">
                             <a class="tool-link tool-link-stable disabled">
@@ -494,10 +678,7 @@
                                     >No stable release yet</span
                                 >
                             </a>
-                            <a
-                                href="https://bell-jamie.github.io/bolted-joint-studio/development"
-                                class="tool-link tool-link-dev"
-                            >
+                            <a class="tool-link tool-link-dev disabled">
                                 Development
                                 <span class="version-tag">v0.2.0-indev</span>
                             </a>
@@ -507,7 +688,61 @@
             </section>
 
             <section class="section">
+                <h2 class="section-title">Libraries</h2>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <h3>Redprint</h3>
+                        <p>
+                            A Rust library for 2D geometry, designed for
+                            engineering applications and rendering interactive
+                            engineering drawing-style graphics. Currently
+                            supports egui / egui_plot for rendering.
+                        </p>
+                        <div class="tool-links">
+                            <a
+                                href="https://github.com/bell-jamie/redprint"
+                                class="tool-link tool-link-stable"
+                            >
+                                GitHub
+                                <span class="version-tag">v0.1.0</span>
+                            </a>
+                            <a class="tool-link tool-link-dev disabled">
+                                Crates.io
+                                <span class="version-tag">In development</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
                 <h2 class="section-title">Updates</h2>
+
+                <div class="blog-post">
+                    <h3>Redprint introduced</h3>
+                    <div class="blog-date">December 4th, 2025</div>
+                    <div class="blog-post-content">
+                        <p>
+                            While developing Bolted Joint Studio, I realised my
+                            engineering drawing rendering code would be better
+                            suited as a separate library to avoid duplication.
+                            <strong>Redprint</strong> (<em
+                                >a portmanteau of redline corrections on
+                                blueprints</em
+                            >) introduces interactivity with the drawings,
+                            allowing direct editing and dragging. It also
+                            generalises the old section hatching code for
+                            mixed-convexity polygons, including inner
+                            boundaries. I'm currently defining its future scope,
+                            and adding functionality as needed.
+                        </p>
+                        <img
+                            src="assets/redprint_update.png"
+                            alt="Redprint library example"
+                            class="blog-post-image"
+                        />
+                    </div>
+                </div>
 
                 <div class="blog-post">
                     <h3>Welcome to my homepage</h3>
@@ -523,11 +758,26 @@
             <footer>
                 <div class="footer-content">
                     <p>© 2025 James Bell</p>
-                    <div class="theme-toggle-wrapper">
+                    <div class="footer-buttons">
+                        <button
+                            class="theme-toggle"
+                            onclick="openDisclaimer()"
+                            aria-label="View disclaimer"
+                            title="Disclaimer"
+                        >
+                            <svg fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                    clip-rule="evenodd"
+                                ></path>
+                            </svg>
+                        </button>
                         <button
                             class="theme-toggle"
                             onclick="toggleTheme()"
                             aria-label="Toggle dark/light mode"
+                            title="Toggle theme"
                         >
                             <svg
                                 class="moon-icon"
@@ -617,6 +867,30 @@
                 document.documentElement.setAttribute("data-theme", newTheme);
                 localStorage.setItem("theme", newTheme);
             }
+
+            // Disclaimer modal
+            const disclaimerModal = document.getElementById("disclaimerModal");
+            const hasSeenDisclaimer = localStorage.getItem("disclaimerSeen");
+
+            if (!hasSeenDisclaimer) {
+                disclaimerModal.classList.add("active");
+            }
+
+            function closeDisclaimer() {
+                disclaimerModal.classList.remove("active");
+                localStorage.setItem("disclaimerSeen", "true");
+            }
+
+            function openDisclaimer() {
+                disclaimerModal.classList.add("active");
+            }
+
+            // Close modal when clicking outside
+            disclaimerModal.addEventListener("click", function (e) {
+                if (e.target === disclaimerModal) {
+                    closeDisclaimer();
+                }
+            });
         </script>
     </body>
 </html>
