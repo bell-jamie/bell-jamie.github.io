@@ -103,7 +103,7 @@
 
             .tech-stack {
                 display: flex;
-                gap: 0.25rem;
+                gap: 0.15rem;
                 align-items: center;
                 justify-content: center;
                 margin-top: 1rem;
@@ -463,7 +463,10 @@
                 flex-wrap: wrap;
                 justify-content: center;
                 width: 100%;
+                max-width: 1200px;
+                padding: 0 2rem;
                 position: relative;
+                margin: 0 auto;
             }
 
             .footer-content p {
@@ -474,9 +477,16 @@
 
             .footer-buttons {
                 position: absolute;
-                right: 1.5rem;
                 display: flex;
                 gap: 0.5rem;
+            }
+
+            .footer-buttons-left {
+                left: 2rem;
+            }
+
+            .footer-buttons-right {
+                right: 2rem;
             }
 
             .modal-overlay {
@@ -569,6 +579,19 @@
                 </p>
                 <button class="modal-button" onclick="closeDisclaimer()">
                     I Understand
+                </button>
+            </div>
+        </div>
+
+        <div class="modal-overlay" id="privateRepoModal">
+            <div class="modal">
+                <h2>Repository Private</h2>
+                <p>
+                    The Redprint repository is currently private while in early
+                    development.
+                </p>
+                <button class="modal-button" onclick="closePrivateRepoModal()">
+                    Got it
                 </button>
             </div>
         </div>
@@ -700,7 +723,11 @@
                         </p>
                         <div class="tool-links">
                             <a
-                                href="https://github.com/bell-jamie/redprint"
+                                href="#"
+                                onclick="
+                                    openPrivateRepoModal();
+                                    return false;
+                                "
                                 class="tool-link tool-link-stable"
                             >
                                 GitHub
@@ -731,10 +758,10 @@
                                 blueprints</em
                             >) introduces interactivity with the drawings,
                             allowing direct editing and dragging. It also
-                            generalises the old section hatching code for
-                            mixed-convexity polygons, including inner
-                            boundaries. I'm currently defining its future scope,
-                            and adding functionality as needed.
+                            generalises the old section view hatching code from
+                            the iso fits calculator for any arbitray section.
+                            I'm currently defining its future scope, and adding
+                            functionality as needed.
                         </p>
                         <img
                             src="assets/redprint_update.png"
@@ -749,16 +776,17 @@
                     <div class="blog-date">October 19th, 2025</div>
                     <p>
                         This page hosts my collection of engineering tools built
-                        with Rust and egui, compiled to WebAssembly for browser
-                        use.
+                        with Rust and egui, compiled to WebAssembly. I'm
+                        constantly updating these as I use them, I would
+                        recommend using the stable versions but feel free to try
+                        out what's currently in development.
                     </p>
                 </div>
             </section>
 
             <footer>
                 <div class="footer-content">
-                    <p>© 2025 James Bell</p>
-                    <div class="footer-buttons">
+                    <div class="footer-buttons footer-buttons-left">
                         <button
                             class="theme-toggle"
                             onclick="openDisclaimer()"
@@ -773,6 +801,9 @@
                                 ></path>
                             </svg>
                         </button>
+                    </div>
+                    <p>© 2025 James Bell</p>
+                    <div class="footer-buttons footer-buttons-right">
                         <button
                             class="theme-toggle"
                             onclick="toggleTheme()"
@@ -803,7 +834,12 @@
                     </div>
                 </div>
                 <div class="social-links">
-                    <a href="https://github.com/bell-jamie" class="social-link">
+                    <a
+                        href="https://github.com/bell-jamie"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="social-link"
+                    >
                         <svg
                             width="16"
                             height="16"
@@ -818,6 +854,8 @@
                     </a>
                     <a
                         href="https://www.linkedin.com/in/bell-jamie/"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         class="social-link"
                     >
                         <svg
@@ -889,6 +927,25 @@
             disclaimerModal.addEventListener("click", function (e) {
                 if (e.target === disclaimerModal) {
                     closeDisclaimer();
+                }
+            });
+
+            // Private repo modal
+            const privateRepoModal =
+                document.getElementById("privateRepoModal");
+
+            function openPrivateRepoModal() {
+                privateRepoModal.classList.add("active");
+            }
+
+            function closePrivateRepoModal() {
+                privateRepoModal.classList.remove("active");
+            }
+
+            // Close modal when clicking outside
+            privateRepoModal.addEventListener("click", function (e) {
+                if (e.target === privateRepoModal) {
+                    closePrivateRepoModal();
                 }
             });
         </script>
