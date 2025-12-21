@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Engineering Tools</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <div class="modal-overlay" id="disclaimerModal">
+            <div class="modal">
+                <h2>Disclaimer</h2>
+                <p>
+                    These tools are provided for educational and reference
+                    purposes only. The author accepts no liability for any
+                    decisions, designs, or outcomes resulting from the use of
+                    these calculators.
+                </p>
+                <p>
+                    Always verify results independently and consult qualified
+                    professionals for critical engineering applications.
+                </p>
+                <button class="modal-button" onclick="closeDisclaimer()">
+                    I Understand
+                </button>
+            </div>
+        </div>
+
+        <div class="modal-overlay" id="privateRepoModal">
+            <div class="modal">
+                <h2>Repository Private</h2>
+                <p>
+                    The Redprint repository is currently private while in early
+                    development.
+                </p>
+                <button class="modal-button" onclick="closePrivateRepoModal()">
+                    Got it
+                </button>
+            </div>
+        </div>
+
+        <div class="container">
+            <header>
+                <h1>Engineering Tools</h1>
+                <p class="subtitle">
+                    Web-based calculators and utilities for mechanical
+                    engineering
+                </p>
+                <div class="tech-stack">
+                    <span>Built with</span>
+                    <a
+                        href="https://www.rust-lang.org/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >Rust</a
+                    >
+                    <span>+</span>
+                    <a
+                        href="https://github.com/emilk/egui/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >egui</a
+                    >
+                    <span>+</span>
+                    <a
+                        href="https://webassembly.org/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >WebAssembly</a
+                    >
+                </div>
+                <div class="header-separator"></div>
+            </header>
+
+            <section class="section">
+                <h2 class="section-title">Tools</h2>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-card-header">
+                            <h3>Precision Fit Studio</h3>
+                            <a
+                                href="https://github.com/bell-jamie/iso-limits-and-fits"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="tool-card-github"
+                                title="View on GitHub"
+                            >
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                                    />
+                                </svg>
+                            </a>
+                        </div>
+                        <p>
+                            A general purpose cylindrical fit tool. Covers both
+                            ISO and custom fits, with MMC, LMC and temperature
+                            outputs.
+                        </p>
+                        <div class="tool-links">
+                            <a
+                                href="https://bell-jamie.github.io/iso-limits-and-fits/"
+                                class="tool-link tool-link-stable"
+                            >
+                                Stable
+                                <span class="version-tag">v0.6.4-alpha</span>
+                            </a>
+                            <a
+                                href="https://bell-jamie.github.io/iso-limits-and-fits/development"
+                                class="tool-link tool-link-dev"
+                            >
+                                Development
+                                <span class="version-tag">v0.7.0-indev</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-card-header">
+                            <h3>Bolted Joint Studio</h3>
+                            <a
+                                href="https://github.com/bell-jamie/bolted-joint-studio"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="tool-card-github"
+                                title="View on GitHub"
+                            >
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                                    />
+                                </svg>
+                            </a>
+                        </div>
+                        <p>
+                            A VDI 2230 bolted joint calculator currently in
+                            development. In parallel development with the
+                            Redprint library.
+                        </p>
+                        <div class="tool-links">
+                            <a class="tool-link tool-link-stable disabled">
+                                Stable
+                                <span class="version-tag"
+                                    >No stable release yet</span
+                                >
+                            </a>
+                            <a class="tool-link tool-link-dev disabled">
+                                Development
+                                <span class="version-tag">v0.2.0-indev</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">Libraries</h2>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <h3>Redprint</h3>
+                        <p>
+                            A Rust library for 2D geometry, designed for
+                            engineering applications and rendering interactive
+                            engineering drawing-style graphics. Currently
+                            supports egui / egui_plot for rendering.
+                        </p>
+                        <div class="tool-links">
+                            <a
+                                href="#"
+                                onclick="
+                                    openPrivateRepoModal();
+                                    return false;
+                                "
+                                class="tool-link tool-link-stable"
+                            >
+                                GitHub
+                                <span class="version-tag">v0.1.0</span>
+                            </a>
+                            <a class="tool-link tool-link-dev disabled">
+                                Crates.io
+                                <span class="version-tag">In development</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">Updates</h2>
+
+                <div class="blog-post">
+                    <h3>Redprint introduced</h3>
+                    <div class="blog-date">December 4th, 2025</div>
+                    <div class="blog-post-content">
+                        <p>
+                            While developing Bolted Joint Studio, I realised my
+                            engineering drawing rendering code would be better
+                            suited as a separate library to avoid duplication.
+                            <strong>Redprint</strong> (<em
+                                >a portmanteau of redline corrections on
+                                blueprints</em
+                            >) introduces interactivity with the drawings,
+                            allowing direct editing and dragging. It also
+                            generalises the old section view hatching code from
+                            the iso fits calculator for any arbitray section.
+                            I'm currently defining its future scope, and adding
+                            functionality as needed.
+                        </p>
+                        <img
+                            src="assets/redprint_update.png"
+                            alt="Redprint library example"
+                            class="blog-post-image"
+                        />
+                    </div>
+                </div>
+
+                <div class="blog-post">
+                    <h3>Welcome to my homepage</h3>
+                    <div class="blog-date">October 19th, 2025</div>
+                    <p>
+                        This page hosts my collection of engineering tools built
+                        with Rust and egui, compiled to WebAssembly. I'm
+                        constantly updating these as I use them, I would
+                        recommend using the stable versions but feel free to try
+                        out what's currently in development.
+                    </p>
+                </div>
+            </section>
+
+            <footer>
+                <div class="footer-content">
+                    <div class="footer-buttons footer-buttons-left">
+                        <button
+                            class="theme-toggle"
+                            onclick="openDisclaimer()"
+                            aria-label="View disclaimer"
+                            title="Disclaimer"
+                        >
+                            <svg fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                    clip-rule="evenodd"
+                                ></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <p>© 2025 James Bell</p>
+                    <div class="footer-buttons footer-buttons-right">
+                        <button
+                            class="theme-toggle"
+                            onclick="toggleTheme()"
+                            aria-label="Toggle dark/light mode"
+                            title="Toggle theme"
+                        >
+                            <svg
+                                class="moon-icon"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                            >
+                                <path
+                                    d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
+                                ></path>
+                            </svg>
+                            <svg
+                                class="sun-icon"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                                    clip-rule="evenodd"
+                                ></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a
+                        href="https://github.com/bell-jamie"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="social-link"
+                    >
+                        <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                        >
+                            <path
+                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                            />
+                        </svg>
+                        GitHub
+                    </a>
+                    <a
+                        href="https://www.linkedin.com/in/bell-jamie/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="social-link"
+                    >
+                        <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                        >
+                            <path
+                                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                            />
+                        </svg>
+                        LinkedIn
+                    </a>
+                    <a
+                        href="mailto:james.m.h.bell@icloud.com"
+                        class="social-link"
+                    >
+                        <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <path
+                                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                            ></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        Email
+                    </a>
+                </div>
+            </footer>
+        </div>
+
+        <script src="main.js"></script>
+    </body>
+</html>
