@@ -60,11 +60,9 @@ header {
     background: linear-gradient(
         90deg,
         transparent 0%,
-        color-mix(in srgb, var(--accent-primary) 60%, transparent)
-            40%,
+        color-mix(in srgb, var(--accent-primary) 60%, transparent) 40%,
         var(--accent-primary) 50%,
-        color-mix(in srgb, var(--accent-primary) 60%, transparent)
-            60%,
+        color-mix(in srgb, var(--accent-primary) 60%, transparent) 60%,
         transparent 100%
     );
     background-size: 200% 100%;
