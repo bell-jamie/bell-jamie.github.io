@@ -14,6 +14,24 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Determine next package version
+        id: version
+        run: |
+          if git fetch origin gh-pages 2>/dev/null && git show FETCH_HEAD:package.json > /tmp/prev.json 2>/dev/null; then
+            PREV=$(node -p "require('/tmp/prev.json').version")
+          else
+            PREV="0.0.0"
+          fi
+          NEXT=$(node -e "
+            const [maj, min, pat] = '$PREV'.split('.').map(Number);
+            console.log(\`\${maj}.\${min}.\${pat + 1}\`);
+          ")
+          echo "Previous version: $PREV -> next version: $NEXT"
+          echo "next=$NEXT" >> "$GITHUB_OUTPUT"
+
+      - name: Set package version
+        run: npm version ${{ steps.version.outputs.next }} --no-git-tag-version --allow-same-version
+
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
