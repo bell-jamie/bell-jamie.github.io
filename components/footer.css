@@ -38,6 +38,21 @@
     display: none;
 }
 
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 1rem 0;
+    border-top: 1px solid var(--jb-border-color);
+    color: var(--jb-text-secondary);
+    background: var(--jb-bg-dark);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+}
+
 .footer-content {
     display: flex;
     align-items: center;
