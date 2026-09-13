@@ -1,0 +1,118 @@
+.theme-toggle {
+    background: transparent;
+    border: 1px solid var(--jb-border-color);
+    border-radius: var(--jb-radius-md);
+    padding: 0.4rem 0.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    gap: 0.4rem;
+}
+
+.theme-toggle:hover {
+    border-color: var(--jb-accent-primary);
+    background: rgba(74, 158, 255, 0.1);
+}
+
+.theme-toggle svg {
+    width: 16px;
+    height: 16px;
+    color: var(--jb-text-secondary);
+}
+
+.theme-toggle:hover svg {
+    color: var(--jb-accent-primary);
+}
+
+.theme-toggle .sun-icon {
+    display: none;
+}
+
+[data-theme="light"] .theme-toggle .sun-icon {
+    display: block;
+}
+
+[data-theme="light"] .theme-toggle .moon-icon {
+    display: none;
+}
+
+.footer-content {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 2rem;
+    position: relative;
+    margin: 0 auto;
+}
+
+.footer-buttons {
+    position: absolute;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.footer-buttons-left {
+    left: 2rem;
+}
+
+.footer-buttons-right {
+    right: 2rem;
+}
+
+.footer-center {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 1;
+    justify-content: center;
+}
+
+.copyright {
+    font-size: 0.9rem;
+    color: var(--jb-text-secondary);
+}
+
+.footer-separator {
+    color: var(--jb-text-secondary);
+    opacity: 0.4;
+    user-select: none;
+}
+
+.social-link {
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    text-decoration: none;
+    color: var(--jb-text-secondary);
+    border: none;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.9rem;
+}
+
+.social-link:hover {
+    color: var(--jb-accent-primary);
+    background: transparent;
+}
+
+.social-link svg {
+    width: 16px;
+    height: 16px;
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        padding: 0 1rem;
+    }
+    .footer-center {
+        gap: 0.5rem;
+    }
+}
