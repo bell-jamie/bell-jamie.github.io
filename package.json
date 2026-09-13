@@ -1,0 +1,9 @@
+{
+  "name": "@bell-jamie/theme",
+  "version": "0.0.3",
+  "type": "module",
+  "files": [
+    "theme.css",
+    "components"
+  ]
+}
